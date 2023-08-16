@@ -10,6 +10,14 @@ app.use(helmet()) // use to safe header request
 app.use(compression()) // Giúp giảm size cho request của khách hàng => giúp tiết kiệm băng thông => app nhanh hơn
 
 // init db
+require('../src/dbs/init.mongodb')
+const { checkOverload, countConnect } = require('../src/helper/check.connect')
+//checkOverload()
+
+app.get('/', (req, res) => {
+    countConnect();
+    res.json({test: 123})
+})
 
 // init routes
 
