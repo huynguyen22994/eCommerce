@@ -9,18 +9,19 @@ const app = express()
 app.use(morgan('dev')) // use for development - app.use(morgan('combined')) - use for ngnix on production => get type access
 app.use(helmet()) // use to safe header request
 app.use(compression()) // Giúp giảm size cho request của khách hàng => giúp tiết kiệm băng thông => app nhanh hơn
+app.use(express.json())
+app.use(express.urlencoded({
+    extended: true
+    
+}))
 
 // init db
 require('../src/dbs/init.mongodb')
-const { checkOverload, countConnect } = require('../src/helper/check.connect')
-//checkOverload()
-
-app.get('/', (req, res) => {
-    countConnect();
-    res.json({test: 123})
-})
+// const { checkOverload, countConnect } = require('../src/helper/check.connect')
+// checkOverload()
 
 // init routes
+app.use('/', require('./routes'))
 
 // handle error
 
