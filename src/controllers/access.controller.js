@@ -12,6 +12,13 @@ class AccessController {
         }).send(res)
     }
 
+    logOut = async (req, res, next) => {
+        new SuccessResponse({
+            message: 'Logout Ok',
+            metadata: await AccessService.logout(req.keyStore)
+        }).send(res)
+    }
+
     signUp = async (req, res ,next) => {
         // return res.status(201).json({
         //     code: '20001', // Code này do team lập trình tự đưa định nghĩa -> khác với code 201 của REST
