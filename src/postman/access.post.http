@@ -3,9 +3,13 @@
 ### Sign up
 POST {{url_api_dev}}/shop/signup
 Content-Type: application/json
+x-api-key: 106503e41f7e807e25e4bbb6771fc6cfd1326d5bfec9dd096d42d26072c5ad884640a01793cae7505700f52ff7334884b0b09d946569b33ef900a8deda3deafb
 
 {
     "name": "Shop dev 1",
     "email": "huy.nguyen29945@gmail.com",
     "password": "1234567"
 }
+
+### API Error
+GET {{url_api_dev}}/shop/signup234
