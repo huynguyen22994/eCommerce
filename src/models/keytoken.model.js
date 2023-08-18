@@ -20,9 +20,13 @@ var keyTokenSchema = new Schema({
         type:String,
         required:true
     },
-    refreshToken:{
+    refreshTokensUsed:{
         type: Array,
-        default: []
+        default: [] // những refresh Token đã được sử dụng
+    },
+    refreshToken: {
+        type: String,
+        require: true
     }
 }, {
     collection: COLLECTION_NAME,
