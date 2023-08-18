@@ -3,13 +3,20 @@
 ### Sign up
 POST {{url_api_dev}}/shop/signup
 Content-Type: application/json
-x-api-key: 106503e41f7e807e25e4bbb6771fc6cfd1326d5bfec9dd096d42d26072c5ad884640a01793cae7505700f52ff7334884b0b09d946569b33ef900a8deda3deafb
+x-api-key: 86d0aae728d5e75ad59dcc6ab3f29eb49b220980dd888ef3a8c2d17c0a27f2c23d73c4313882f33c49489f52105dd039268884829a7225cddf3d00ec44719838
 
 {
     "name": "Shop dev 1",
-    "email": "huy.nguye45n29945@gmail.com",
+    "email": "huy.nguyen2994@gmail.com",
     "password": "1234567"
 }
 
-### API Error
-GET {{url_api_dev}}/shop/signup234
+### LogIn
+POST {{url_api_dev}}/shop/login
+Content-Type: application/json
+x-api-key: 86d0aae728d5e75ad59dcc6ab3f29eb49b220980dd888ef3a8c2d17c0a27f2c23d73c4313882f33c49489f52105dd039268884829a7225cddf3d00ec44719838
+
+{
+    "email": "huy.nguyen2994@gmail.com",
+    "password": "1234567"
+}
