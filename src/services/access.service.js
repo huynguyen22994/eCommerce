@@ -5,6 +5,7 @@ const shopModel = require('../models/shop.model')
 const KeyTokenService = require('./keyToken.service')
 const { createTokenPair } = require('../auth/authUtils')
 const { getInfoData } = require('../utils')
+const { BadRequestError } = require('../core/error.response')
 
 // Những role của shop nên dùng ký tự code chứ ko nên đặt tên giống bên dưới để phòng trường hợp dữ liệu có rò rĩ hacker cũng ko đoán được đó là role gì
 const RoleShop = {
@@ -20,10 +21,7 @@ class AccessService {
             // step 1: check email exist
             const holderShop = await shopModel.findOne({ email }).lean()
             if(holderShop) {
-                return {
-                    code: 'xxx',
-                    message: 'Shop is already registered!!'
-                }
+                throw new BadRequestError('Error: Shop is already registered!!')
             }
 
             const passwordHash = await bcrypt.hash(password, 10) // Băm password để lưu vào DB. Phòng trường hợp dữ liệu rò rỉ hacker cũng không truy cập vào hệ thống được
@@ -57,10 +55,7 @@ class AccessService {
                     privateKey
                 })
                 if(!publicKeyString) {
-                    return {
-                        code: 'xxx',
-                        message: 'publicKeyString error'
-                    }
+                    throw new BadRequestError('Error: PublicKeyString error')
                 }
                 const publicKeyObject = crypto.createPublicKey( publicKeyString ) // Đưa public key đạng JSON String từ DB thành OBJECT Key 
                 console.log(`PublicKey Object:::`, publicKeyObject)
@@ -85,7 +80,7 @@ class AccessService {
 
         } catch(error) {
             return {
-                code: 'xxx',
+                code: error.status,
                 message: error.message,
                 status: 'error'
             }
