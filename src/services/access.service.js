@@ -3,9 +3,9 @@ const bcrypt = require('bcrypt')
 const crypto = require('crypto')
 const shopModel = require('../models/shop.model')
 const KeyTokenService = require('./keyToken.service')
-const { createTokenPair } = require('../auth/authUtils')
+const { createTokenPair, verifyJWT } = require('../auth/authUtils')
 const { getInfoData } = require('../utils')
-const { BadRequestError, AuthFailureError } = require('../core/error.response')
+const { BadRequestError, AuthFailureError, ForbiddenError } = require('../core/error.response')
 const { findByEmail } = require('../services/shop.service')
  
 // Những role của shop nên dùng ký tự code chứ ko nên đặt tên giống bên dưới để phòng trường hợp dữ liệu có rò rĩ hacker cũng ko đoán được đó là role gì
@@ -134,6 +134,47 @@ class AccessService {
                 message: error.message,
                 status: 'error'
             }
+        }
+    }
+
+    /*
+      1. check this token used?
+      2. if token have been used -> 
+    */
+    static handleRefreshToken = async (refreshToken) => {
+        // check xem token nay đã được sử dụng chưa
+        const foundToken = await KeyTokenService.findByRefreshTokenUsed(refreshToken)
+        // nếu có
+        if(foundToken) {
+            // decode xem token này là của ai lại dùng lại -> có khả năng token này bị hacker đánh cắp
+            const { userId, email } = await verifyJWT(refreshToken, foundToken.publicKey)
+            // xóa tất cả token của userId này trong keyStore
+            await KeyTokenService.removeKeyByUserId(userId)
+            throw new ForbiddenError('Error: Something wrong happend!!!')
+        }
+        // nếu không -> kiểm tra xem token này có đang xử dụng như refreshToken hiện tại
+        // console.log(`[1]:::::`,refreshToken)
+        const holderToken = await KeyTokenService.findByRefreshToken(refreshToken)
+        if(!holderToken) throw new AuthFailureError('Error: Token not found')
+        // verify token
+        const { userId, email } = await verifyJWT(refreshToken, holderToken.publicKey)
+        // check user by userId or email
+        const foundShop = await findByEmail({ email })
+        if(!foundShop) throw new AuthFailureError('Error: Shop by token not found')
+        // create new token pair
+        const tokens = await createTokenPair({ userId, email }, holderToken.publicKey, holderToken.privateKey)
+        // update new token for keyStore and add current token to refreshTokenUsed
+        await holderToken.updateOne({
+            $set: {
+                refreshToken: tokens.refreshToken
+            },
+            $addToSet: {
+                refreshTokensUsed: refreshToken // đây là token hiện tại và được đẩy vào refreshTokenUsed vì hiện tại use dùng token mới cấp rồi
+            }
+        })
+        return {
+            user: { userId, email },
+            tokens
         }
     }
 }

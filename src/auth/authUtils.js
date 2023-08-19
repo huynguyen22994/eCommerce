@@ -6,6 +6,7 @@ const { AuthFailureError, NotFoundError } = require('../core/error.response')
 
 // services
 const { findByUserId } = require('../services/keyToken.service')
+const { token } = require('morgan')
 
 const HEADER = {
     API_KEY: 'x-api-key',
@@ -67,7 +68,12 @@ const authentication = asyncHandle( async (req, res, next) => {
     }
 } )
 
+const verifyJWT = async (token, keySecrect) => {
+    return await JWT.verify(token, keySecrect)
+}
+
 module.exports = {
     createTokenPair,
-    authentication
+    authentication,
+    verifyJWT
 }
