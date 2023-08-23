@@ -5,6 +5,12 @@ const { OK, CREATED, SuccessResponse } = require('../core/success.response')
 
 class AccessController {
 
+    /**
+     * Login for user who is owner of shop
+     * @param {Object} req 
+     * @param {Object} res 
+     * @param {Function} next 
+     */
     logIn = async (req, res, next) => {
         new SuccessResponse({
             message: 'Login Ok',
@@ -12,6 +18,12 @@ class AccessController {
         }).send(res)
     }
 
+    /**
+     * Logout for user
+     * @param {Object} req 
+     * @param {Object} res 
+     * @param {Function} next 
+     */
     logOut = async (req, res, next) => {
         new SuccessResponse({
             message: 'Logout Ok',
@@ -19,6 +31,12 @@ class AccessController {
         }).send(res)
     }
 
+    /**
+     * Signup a new account for owner of shop
+     * @param {Object} req 
+     * @param {Object} res 
+     * @param {Function} next 
+     */
     signUp = async (req, res ,next) => {
         // return res.status(201).json({
         //     code: '20001', // Code này do team lập trình tự đưa định nghĩa -> khác với code 201 của REST
@@ -37,6 +55,12 @@ class AccessController {
         }).send(res)
     }
 
+    /**
+     * Get new accessToken by refreshToken
+     * @param {Object} req 
+     * @param {Object} res 
+     * @param {Function} next 
+     */
     handleRefreshToken = async (req, res ,next) => {
         // v1: use function authentication
         // new SuccessResponse({
