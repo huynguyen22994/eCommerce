@@ -17,8 +17,11 @@ const RoleShop = {
 }
 class AccessService {
 
-    /*
-      Login
+   /**
+    * Handle login for shop
+    * @param {email, password, refreshToken} param0
+    * @returns { shop: {...}, tokens: {...} }
+    * Login steps
         1. check email in db
         2. match password
         3. create Access token and Refresh token and save
@@ -61,11 +64,21 @@ class AccessService {
         }
     }
 
+    /**
+     * Handle logout account shop
+     * @param {Object} keyStore 
+     * @returns Object
+     */
     static logout = async (keyStore) => {
         const delData = await KeyTokenService.removeKeyById(keyStore._id)
         return delData
     }
 
+    /**
+     * Hanlde signup a new account for shop
+     * @param {Object} param0 
+     * @returns { code: number, metadata: Object }
+     */
     static signup = async ({ name, email, password }) => {
         try {
             // step 1: check email exist
@@ -138,8 +151,11 @@ class AccessService {
         }
     }
 
-    /*
-      1. check this token used?
+   /**
+    * Handle to get new accessToken by using refreshToken
+    * @param {String} refreshToken 
+    * @returns { user: Object, tokens: Object }
+    * 1. check this token used?
       2. if token have been used -> 
     */
     static handleRefreshToken = async (refreshToken) => {
@@ -179,6 +195,13 @@ class AccessService {
         }
     }
 
+    /**
+    * V2: Handle to get new accessToken by using refreshToken
+    * @param {String} refreshToken 
+    * @returns { user: Object, tokens: Object }
+    * 1. check this token used?
+      2. if token have been used -> 
+    */
     static handleRefreshTokenV2 = async ({ refreshToken, user, keyStore }) => {
         const { userId, email } = user
         if(keyStore.refreshTokensUsed.includes(refreshToken)) {

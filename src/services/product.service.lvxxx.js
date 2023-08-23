@@ -2,6 +2,7 @@
 
 const { product, clothes, electronic, furniture } = require('../models/product.model')
 const { BadRequestError, ForbiddenError } = require('../core/error.response')
+const { findAllDraftForShop, findAllPublishForShop,  publishProductByShop, unPublishProductByShop } = require('../models/repositories/product.repo')
 
 // defined Factory class to create Product
 class ProductFactory {
@@ -12,9 +13,11 @@ class ProductFactory {
         ProductFactory.productRegistry[type] = classRef
     }
 
-    /*
-        type: 'Clothing' | 'Electronics'
-        payload
+   /**
+    * Create new product
+    * @param {String} type 'Clothing' | 'Electronics'
+    * @param {Object} payload 
+    * @returns Object
     */
     static createProduct = async (type, payload) => {
         const productClass = ProductFactory.productRegistry[type]
@@ -22,6 +25,44 @@ class ProductFactory {
 
         return await new productClass(payload).createProduct()
     }
+
+    // Query
+    /**
+     * Get draft product for shop
+     * @param {Object} param0 
+     * @returns 
+     */
+    static findAllDraftForShop = async ( { product_shop, limit = 50, skip = 0 } ) => {
+        const query = { product_shop, isDraft: true }
+        
+        return await findAllDraftForShop({ query, limit, skip  })
+    }
+
+    /**
+     * Get publish product for shop
+     * @param {Object} param0 
+     * @returns 
+     */
+    static findAllPublishForShop = async ( { product_shop, limit = 50, skip = 0 } ) => {
+        const query = { product_shop, isPublished: true }
+        
+        return await findAllPublishForShop({ query, limit, skip  })
+    }
+    // END QUERY
+
+    // PUT
+    /**
+     * Handle publish product from draft of shop
+     * @param {Object} param0 
+     */
+    static publishProductByShop = async ({ product_shop, product_id }) => {
+        return await publishProductByShop({ product_shop, product_id })
+    }
+
+    static unPublishProductByShop = async ({ product_shop, product_id }) => {
+        return await unPublishProductByShop({ product_shop, product_id })
+    }
+    // END PUT
 }
 
 // defined base product class

@@ -6,6 +6,13 @@ const { OK, CREATED, SuccessResponse } = require('../core/success.response')
 
 class ProductController {
 
+    // POST
+    /**
+     * Create a new product
+     * @param {Object} req 
+     * @param {Object} res 
+     * @param {Function} next 
+     */
     createProduct = async (req, res, next) => {
         new SuccessResponse({
             message: 'Create product OK',
@@ -15,6 +22,59 @@ class ProductController {
             })
         }).send(res)
     }
+
+    publishProductByShop = async (req, res, next) => {
+        new SuccessResponse({
+            message: 'Publish product OK',
+            metadata: await ProductServiceV2.publishProductByShop({
+                product_shop: req.user.userId,
+                product_id: req.params.id
+            })
+        }).send(res)
+    }
+
+    unPublishProductByShop = async (req, res, next) => {
+        new SuccessResponse({
+            message: 'UnPublish product OK',
+            metadata: await ProductServiceV2.unPublishProductByShop({
+                product_shop: req.user.userId,
+                product_id: req.params.id
+            })
+        }).send(res)
+    }
+    // END POST
+
+    // QUERY
+    /**
+     * Get all draft product for shop
+     * @param {Object} req 
+     * @param {Object} res 
+     * @param {Function} next 
+     */
+    getAllDraftForShop = async (req, res, next) => {
+        new SuccessResponse({
+            message: 'Get products draft OK',
+            metadata: await ProductServiceV2.findAllDraftForShop({ 
+                product_shop: req.user.userId, limit: 30, skip: 0 
+            })
+        }).send(res)
+    }
+
+    /**
+     * Get all publish product for shop
+     * @param {Object} req 
+     * @param {Object} res 
+     * @param {Function} next 
+     */
+    getAllPublishForShop = async (req, res, next) => {
+        new SuccessResponse({
+            message: 'Get products publish OK',
+            metadata: await ProductServiceV2.findAllPublishForShop({ 
+                product_shop: req.user.userId, limit: 30, skip: 0 
+            })
+        }).send(res)
+    }
+    //END QUERY
 
 }
 
