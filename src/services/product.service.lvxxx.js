@@ -5,21 +5,22 @@ const { BadRequestError, ForbiddenError } = require('../core/error.response')
 
 // defined Factory class to create Product
 class ProductFactory {
+
+    static productRegistry = {}
+
+    static registProductType = ( type, classRef ) => {
+        ProductFactory.productRegistry[type] = classRef
+    }
+
     /*
         type: 'Clothing' | 'Electronics'
         payload
     */
     static createProduct = async (type, payload) => {
-        switch(type) {
-            case 'Clothing':
-                return await new Clothing(payload).createProduct()
-            case 'Electronics':
-                return await new Electronic(payload).createProduct()
-            case 'Furniture':
-                return await new Furniture(payload).createProduct()    
-            default:
-                throw new BadRequestError(`Invalid Product Type ${type}`)
-        }
+        const productClass = ProductFactory.productRegistry[type]
+        if(!productClass) throw new BadRequestError(`Invalid Product Type ${type}`)
+
+        return await new productClass(payload).createProduct()
     }
 }
 
@@ -94,5 +95,10 @@ class Furniture extends Product {
         return newProduct
     }
 }
+
+// regist product types
+ProductFactory.registProductType('Clothing', Clothing)
+ProductFactory.registProductType('Electronics', Electronic)
+ProductFactory.registProductType('Furniture', Furniture)
 
 module.exports = ProductFactory

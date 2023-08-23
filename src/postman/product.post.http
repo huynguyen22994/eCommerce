@@ -8,18 +8,32 @@ x-api-key: 86d0aae728d5e75ad59dcc6ab3f29eb49b220980dd888ef3a8c2d17c0a27f2c23d73c
 authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGRmMzdiOTUxZWJlYWFlMmJhNDI3ZGUiLCJlbWFpbCI6Imh1eS5uZ3V5ZW4yOTk0QGdtYWlsLmNvbSIsImlhdCI6MTY5Mjc2NjQ5OSwiZXhwIjoxNjkyOTM5Mjk5fQ.QMhxa8Y9c8ES9AzonWNxpbwfRt7kzlPEg8clhppy-paqPAHTiH6iNJ8ran3W6UvHDJkCC9RDoVbjSpmeHDMwt72ZpOXfdr74O9Q4D7G7UGy7a2aP2rowqPFxFJklHUvUwiiMt1nRmUpVuQwmHscBMaNalltM8rCHYAddQVaJcC0kf3fEKysqB7p2Q6oIDl_P5AQOTnrkp8j_aa8LpGpcnZEFnzFbEufCpgogdjTzXQXQsgiwFonFYZaQyEsxd71rxYBn1Dj78vhDS8JWqYqE7hVwshnOxVJqpKdINxZVgYPS1bkKI492pfyquCgUel8Rw8OIdEqkHDJmQq2ztsAzTQACOWQaulduiyA0Hjty9vo78TRy5uZr8_fuMcxEH2Yba2-_DEXK3UtFNDwHCzlQWp6bAgRKmyil8Ci0FQTleR-LjXdUVJ2z0ZBzOUQeSHDHBv8r1vz-P3FZe3FjkTUuA7MPAyxmxUfyQWKZcB95G2ujsAljd39fwdluByaAob83sA2Z0MifcKI8CWVv1bBa3Is-ZTLvOvX02kMODx4uGykMh1QAmlo1yrgO2oVTi1L7nxOzYXZOUbLI7vjjgfsAeYFTLOGlSTHM6fVSKSpWAQOvJEOAFvjBrNohOBsduBfvPqYtQ_i_ZRfMkV9GWJZVrEvutqXdqyVWGzw0O8Wr-nA
 
 {
-    "product_name": "Iphone 14",
+    "product_name": "Bàn làm việc cao cấp",
     "product_thumb": "productthumbimage",
-    "product_description": "Sản phẩm mới của Applo",
-    "product_price": 200000,
+    "product_description": "Sản phẩm mới của HAGL",
+    "product_price": 2000000,
     "product_quantity": 50,
-    "product_type": "Electronics",
+    "product_type": "Furniture",
     "product_attributes": {
-        "manufacturer": "Applo",
-        "model": "463899",
-        "color": "black"
+        "brand": "HAGL",
+        "size": "30",
+        "material": "gỗ"
     }
 }
+
+# {
+#     "product_name": "Iphone 14",
+#     "product_thumb": "productthumbimage",
+#     "product_description": "Sản phẩm mới của Applo",
+#     "product_price": 200000,
+#     "product_quantity": 50,
+#     "product_type": "Electronics",
+#     "product_attributes": {
+#         "manufacturer": "Applo",
+#         "model": "463899",
+#         "color": "black"
+#     }
+# }
 
 # {
 #     "product_name": "Quần Jean",
