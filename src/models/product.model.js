@@ -39,6 +39,9 @@ var productSchema = new Schema({
     timestamps: true
 });
 
+// Create index for Search
+productSchema.index({ product_name: 'text', product_description: 'text' })
+
 // Document middleware: runs before .save() and .create() ... -> Trigger hàm middleware trước khi lưu, update hoặc thao tác khác ...
 productSchema.pre('save', function(next) { // apply midelware cho hàm save. Thực hiện trước khi save()
     this.product_slug = slugify(this.product_name, { lower: true })

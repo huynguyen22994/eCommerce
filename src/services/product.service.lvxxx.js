@@ -2,7 +2,7 @@
 
 const { product, clothes, electronic, furniture } = require('../models/product.model')
 const { BadRequestError, ForbiddenError } = require('../core/error.response')
-const { findAllDraftForShop, findAllPublishForShop,  publishProductByShop, unPublishProductByShop } = require('../models/repositories/product.repo')
+const { findAllDraftForShop, findAllPublishForShop,  publishProductByShop, unPublishProductByShop, searchProductByUser } = require('../models/repositories/product.repo')
 
 // defined Factory class to create Product
 class ProductFactory {
@@ -26,7 +26,6 @@ class ProductFactory {
         return await new productClass(payload).createProduct()
     }
 
-    // Query
     /**
      * Get draft product for shop
      * @param {Object} param0 
@@ -48,9 +47,11 @@ class ProductFactory {
         
         return await findAllPublishForShop({ query, limit, skip  })
     }
-    // END QUERY
 
-    // PUT
+    static searchProduct = async ( { keySearch } ) => {
+        return await searchProductByUser({ keySearch })
+    }
+
     /**
      * Handle publish product from draft of shop
      * @param {Object} param0 
@@ -62,7 +63,6 @@ class ProductFactory {
     static unPublishProductByShop = async ({ product_shop, product_id }) => {
         return await unPublishProductByShop({ product_shop, product_id })
     }
-    // END PUT
 }
 
 // defined base product class
