@@ -38,10 +38,22 @@ class AccessController {
     }
 
     handleRefreshToken = async (req, res ,next) => {
+        // v1: use function authentication
+        // new SuccessResponse({
+        //     message: 'Get new token success!',
+        //     metadata: await AccessService.handleRefreshToken(req.body.refreshToken)
+        // }).send(res)
+
+        // v2: use authenticationV2 -> handle block access by only checking asscessToken
         new SuccessResponse({
             message: 'Get new token success!',
-            metadata: await AccessService.handleRefreshToken(req.body.refreshToken)
+            metadata: await AccessService.handleRefreshTokenV2({
+                refreshToken: req.refreshToken,
+                user: req.user,
+                keyStore: req.keyStore
+            })
         }).send(res)
+
     }
 }
 
