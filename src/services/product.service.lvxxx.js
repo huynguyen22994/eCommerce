@@ -4,7 +4,8 @@ const { product, clothes, electronic, furniture } = require('../models/product.m
 const { BadRequestError, ForbiddenError } = require('../core/error.response')
 const { findAllDraftForShop, findAllPublishForShop,  publishProductByShop, 
         unPublishProductByShop, searchProductByUser, findAllProducts,
-        findProduct } = require('../models/repositories/product.repo')
+        findProduct, updateProductById } = require('../models/repositories/product.repo')
+const { removeUndefinedObject, updateNestedObjectParser } = require('../utils')        
 
 // defined Factory class to create Product
 class ProductFactory {
@@ -28,11 +29,11 @@ class ProductFactory {
         return await new productClass(payload).createProduct()
     }
 
-    static updateProduct = async (type, payload) => {
-        // const productClass = ProductFactory.productRegistry[type]
-        // if(!productClass) throw new BadRequestError(`Invalid Product Type ${type}`)
+    static updateProduct = async (type, productId, payload) => {
+        const productClass = ProductFactory.productRegistry[type]
+        if(!productClass) throw new BadRequestError(`Invalid Product Type ${type}`)
 
-        // return await new productClass(payload).createProduct()
+        return await new productClass(payload).updateProduct(productId)
     }
 
     /**
@@ -105,6 +106,11 @@ class Product {
             _id: product_id
         })
     }
+
+    // update product
+    async updateProduct(productId, payload) {
+        return await updateProductById({ productId, payload, model: product })
+    }
 }
 
 // defined sub-class for different product types Clothing
@@ -120,6 +126,18 @@ class Clothing extends Product {
         if(!newProduct) throw new BadRequestError('Error: Create product error')
 
         return newProduct
+    }
+
+    async updateProduct(productId) {
+        // 1. xử lý những attr là null or undefined
+        const objectParams = removeUndefinedObject(this)
+        // 2. Kiểm tra xem update những attr nào
+        if(objectParams.product_attributes) {
+            // update child
+            await updateProductById({ productId, payload: updateNestedObjectParser(objectParams), model: clothes })
+        }
+        const updateProduct = await super.updateProduct(productId, updateNestedObjectParser(objectParams))
+        return updateProduct
     }
 }
 
@@ -137,6 +155,19 @@ class Electronic extends Product {
 
         return newProduct
     }
+
+    async updateProduct(productId) {
+        // 1. xử lý những attr là null or undefined
+        const objectParams = removeUndefinedObject(this)
+        console.log(objectParams)
+        // 2. Kiểm tra xem update những attr nào
+        if(objectParams.product_attributes) {
+            // update child
+            await updateProductById({ productId, payload: updateNestedObjectParser(objectParams), model: electronic })
+        }
+        const updateProduct = await super.updateProduct(productId, updateNestedObjectParser(objectParams))
+        return updateProduct
+    }
 }
 
 class Furniture extends Product {
@@ -151,6 +182,18 @@ class Furniture extends Product {
         if(!newProduct) throw new BadRequestError('Error: Create product error')
 
         return newProduct
+    }
+
+    async updateProduct(productId) {
+        // 1. xử lý những attr là null or undefined
+        const objectParams = removeUndefinedObject(this)
+        // 2. Kiểm tra xem update những attr nào
+        if(objectParams.product_attributes) {
+            // update child
+            await updateProductById({ productId, payload: updateNestedObjectParser(objectParams), model: furniture })
+        }
+        const updateProduct = await super.updateProduct(productId, updateNestedObjectParser(objectParams))
+        return updateProduct
     }
 }
 

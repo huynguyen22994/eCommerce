@@ -35,6 +35,25 @@ authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGRmMzdiOTUx
 #     }
 # }
 
+### Update Product
+PATCH {{url_api_dev}}/product/64e5be7f4ec0b26264cbec21
+Content-Type: application/json
+x-client-id: 64df37b951ebeaae2ba427de
+x-api-key: 86d0aae728d5e75ad59dcc6ab3f29eb49b220980dd888ef3a8c2d17c0a27f2c23d73c4313882f33c49489f52105dd039268884829a7225cddf3d00ec44719838
+authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGRmMzdiOTUxZWJlYWFlMmJhNDI3ZGUiLCJlbWFpbCI6Imh1eS5uZ3V5ZW4yOTk0QGdtYWlsLmNvbSIsImlhdCI6MTY5Mjk0NzY0MiwiZXhwIjoxNjkzMTIwNDQyfQ.EkASIOX7Et_OVCx6iyMuAe8wq6V-gbBQm-mTF0VCL3HBuEzBCrh8D7q6xuqMKSkzzpgF1GcBO2aTX-SR0StefBnf7N2bWSBHULBsvR6r6SQ4P-hNu2fclkuIRLxmlyKRXs8lwd7BhmR8hinnbgwAxHwmV59ARQ9cgMv1vwDpMqc3CBJsI3YndVXJQO5R2U_BZDNSPdpnlUyHZlQEIZH011m9BcOd2wo5R6TMT5QWUmaQE206lPMA9eXPGg0XLJPiDBOZHQNAvtSb3jGdSZrzirJ__qNa6L0mx0geiuxNUMI6-hXsMMSnZQvPVyzl01RYy-wb4yd90qeqxA2zb7xC2TcFauNPZR1E90M_Ix0JTUd9VCpI9lza-TiJl-KWsKh9QmtrFZEgbCiYONmf7tC_p2w9YE__Mxt1dGGKN099ff_Xi8UU1KA2TH88YDkyCoOuIr_zT0inXveVvg6GP4h1cao8_xfZpkp8RQBoZAXLZfL97yrRKpdjQdpeMr5DeNT6h08nEdwLFp2UgBixjF9fa4aSG2kwve5Hn4Ji5VnmEcFKmqOMTKCewA-KObcTj0Kju6G4o4cACaqg08Zuqm1BFmoDlbQtD_4HeGEebU-4K4HWgKdgbkwtYX9WnRANKfWDIWLQcZHoZYh_RJ5McTISZbiw607FKSgmHw1apzVCpaE
+
+{
+    "product_name": "Iphone 166688",
+    "product_description": "Sản phẩm mới của Applo name 2029",
+    "product_price": null,
+    "product_type": "Electronics",
+    "product_attributes": {
+        "manufacturer": "Applo",
+        "model": "463936235899",
+        "color": null
+    }
+}
+
 ### Get Draft Product
 GET {{url_api_dev}}/product/draft/all
 Content-Type: application/json
