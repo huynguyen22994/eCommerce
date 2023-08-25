@@ -18,6 +18,8 @@ router.post('', asyncHandle(ProductController.createProduct))
 router.post('/publish/:id', asyncHandle(ProductController.publishProductByShop))
 router.post('/unpublish/:id', asyncHandle(ProductController.unPublishProductByShop))
 
+router.patch('/:productId', asyncHandle(ProductController.updateProduct))
+
 // QUERY
 router.get('/draft/all', asyncHandle(ProductController.getAllDraftForShop))
 router.get('/publish/all', asyncHandle(ProductController.getAllPublishForShop))
