@@ -76,11 +76,26 @@ class ProductController {
     }
 
     getListSearchProduct = async (req, res, next) => {
-        console.log('INTO::::::::')
         new SuccessResponse({
             message: 'Get list search product OK',
             metadata: await ProductServiceV2.searchProduct({ 
                 keySearch: req.params.keySearch
+            })
+        }).send(res)
+    }
+
+    findAllProducts = async (req, res, next) => {
+        new SuccessResponse({
+            message: 'Get list product OK',
+            metadata: await ProductServiceV2.findAllProducts(req.query)
+        }).send(res)
+    }
+
+    findProduct = async (req, res, next) => {
+        new SuccessResponse({
+            message: 'Get one product OK',
+            metadata: await ProductServiceV2.findProduct({
+                product_id: req.params.product_id
             })
         }).send(res)
     }

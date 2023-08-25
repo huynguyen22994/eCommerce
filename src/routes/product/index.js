@@ -8,6 +8,8 @@ const router = express.Router()
 
 // No Authentication
 router.get('/search/:keySearch', asyncHandle(ProductController.getListSearchProduct))
+router.get('', asyncHandle(ProductController.findAllProducts))
+router.get('/:product_id', asyncHandle(ProductController.findProduct))
 
 // Authentication
 router.use(authenticationV2)
