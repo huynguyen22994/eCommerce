@@ -3,7 +3,7 @@
 ### Sign up
 POST {{url_api_dev}}/shop/signup
 Content-Type: application/json
-x-api-key: 86d0aae728d5e75ad59dcc6ab3f29eb49b220980dd888ef3a8c2d17c0a27f2c23d73c4313882f33c49489f52105dd039268884829a7225cddf3d00ec44719838
+x-api-key: efe748f90d00fe702310638b3abd149c26bb0d693549777f300e049cd9e09a0735fd3fde650ca7a3a67744b93f903fcf2f35a59438c8eec2a693760b7600186b
 
 {
     "name": "Shop dev 1",
@@ -14,7 +14,7 @@ x-api-key: 86d0aae728d5e75ad59dcc6ab3f29eb49b220980dd888ef3a8c2d17c0a27f2c23d73c
 ### LogIn
 POST {{url_api_dev}}/shop/login
 Content-Type: application/json
-x-api-key: 86d0aae728d5e75ad59dcc6ab3f29eb49b220980dd888ef3a8c2d17c0a27f2c23d73c4313882f33c49489f52105dd039268884829a7225cddf3d00ec44719838
+x-api-key: efe748f90d00fe702310638b3abd149c26bb0d693549777f300e049cd9e09a0735fd3fde650ca7a3a67744b93f903fcf2f35a59438c8eec2a693760b7600186b
 
 {
     "email": "huy.nguyen2994@gmail.com",
