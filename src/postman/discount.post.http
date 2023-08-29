@@ -1,0 +1,57 @@
+@url_api_dev = http://localhost:3000/v1/api
+
+### Create new discount from shop
+POST {{url_api_dev}}/discount
+Content-Type: application/json
+x-client-id: 64ee1ecb8979971154cfe17a
+x-api-key: 1837ffa7e5bc0c6aa5ccf91462729d7102bdcafd7864541bf04b997e7eba342b066dbfa0462c8e1a6ed9e8ec7b5b622f025f07f7b71d61d416fd9cfc34a4dc51
+authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGVlMWVjYjg5Nzk5NzExNTRjZmUxN2EiLCJlbWFpbCI6Imh1eS5uZ3V5ZW4yOTk0QGdtYWlsLmNvbSIsImlhdCI6MTY5MzMyNzA1MywiZXhwIjoxNjkzNDk5ODUzfQ.FYU23V9h0SixYH8ZucMZO396B7s9fJyq9ikLwQn6ZhHsxUOc-ptQoCd4F04vCvUzpVtRIiqPQ_gWN7wC7PHrW75m6UpkPnVgAGyO2eNbX8PMcVmr1XNMkO-UFnAsQN4DOPQr6p9U6gK4RxX6ZAqrvho8knESKdsBb-cNUgb9Nk52VC54GRcCo6Yto48iBr9VJ8xHwqkDf1B9m0c6n-tLZ8Uw8TnN2yHPCEwVsbOnOsaM3thLkpUX3DUjlw-P0ztvU2iEaozzfCqteVD7TOr3mK_GQmLhXDXXyq0Mk2a08MmvuRUL-REwXW4RzAWPVb8Q4sAtU-T8JJos87QlQH2c8KIK7p6EkUF2Jq4eqJ37kgE812yRoRVhqzMTJw6Lle1MP_odlkaXNPzhUMe2jYuntStCDp8cCvROtG6lJJ8A5ch30tzPpNq_n5eyTlZ0577gFCrGykbWDnQMcNOen5cPzNFmpRvMzAkH7QN3MwLttvQFBKXdUU11u7oV55EHAHj6wYkmW4PRQlfNDQu0pPmDu4uPj3TXwxmZ1Qtsb-WZ9Sv68N3ZLMVPoNqSO-RgerLsOkzZ_Kud6Stqw_txKDSAe3jQbux7E5_heJfY7vgecvh4nrUFv8rWu-IjsTydnh-qayVI2_dkicIFQ92PbGPwnwVhTbHxSbu_ciYmdBt3Fiw
+
+{
+    "name": "code fixed amount",
+    "description": "Use this code to get discount",
+    "type": "fixed_amount",
+    "value": 30000,
+    "max_value": 30000,
+    "code": "SHOP-1234",
+    "start_date": "2023-08-30 20:00:00",
+    "end_date": "2023-09-30 20:00:00",
+    "max_uses": 100,
+    "users_count": 0,
+    "users_used": [],
+    "max_uses_per_user": 1,
+    "min_order_value": 200000,
+    "is_active": true,
+    "applies_to": "specific",
+    "product_ids": ["64ee21b781ac1055c94ae724"]
+}
+
+### Get list discount of Shop
+GET {{url_api_dev}}/discount
+Content-Type: application/json
+x-client-id: 64ee1ecb8979971154cfe17a
+x-api-key: 1837ffa7e5bc0c6aa5ccf91462729d7102bdcafd7864541bf04b997e7eba342b066dbfa0462c8e1a6ed9e8ec7b5b622f025f07f7b71d61d416fd9cfc34a4dc51
+authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGVlMWVjYjg5Nzk5NzExNTRjZmUxN2EiLCJlbWFpbCI6Imh1eS5uZ3V5ZW4yOTk0QGdtYWlsLmNvbSIsImlhdCI6MTY5MzMyNzA1MywiZXhwIjoxNjkzNDk5ODUzfQ.FYU23V9h0SixYH8ZucMZO396B7s9fJyq9ikLwQn6ZhHsxUOc-ptQoCd4F04vCvUzpVtRIiqPQ_gWN7wC7PHrW75m6UpkPnVgAGyO2eNbX8PMcVmr1XNMkO-UFnAsQN4DOPQr6p9U6gK4RxX6ZAqrvho8knESKdsBb-cNUgb9Nk52VC54GRcCo6Yto48iBr9VJ8xHwqkDf1B9m0c6n-tLZ8Uw8TnN2yHPCEwVsbOnOsaM3thLkpUX3DUjlw-P0ztvU2iEaozzfCqteVD7TOr3mK_GQmLhXDXXyq0Mk2a08MmvuRUL-REwXW4RzAWPVb8Q4sAtU-T8JJos87QlQH2c8KIK7p6EkUF2Jq4eqJ37kgE812yRoRVhqzMTJw6Lle1MP_odlkaXNPzhUMe2jYuntStCDp8cCvROtG6lJJ8A5ch30tzPpNq_n5eyTlZ0577gFCrGykbWDnQMcNOen5cPzNFmpRvMzAkH7QN3MwLttvQFBKXdUU11u7oV55EHAHj6wYkmW4PRQlfNDQu0pPmDu4uPj3TXwxmZ1Qtsb-WZ9Sv68N3ZLMVPoNqSO-RgerLsOkzZ_Kud6Stqw_txKDSAe3jQbux7E5_heJfY7vgecvh4nrUFv8rWu-IjsTydnh-qayVI2_dkicIFQ92PbGPwnwVhTbHxSbu_ciYmdBt3Fiw
+
+### Get list product of code discount
+GET {{url_api_dev}}/discount/list_product_code?code=SHOP-1234&shopId=64ee1ecb8979971154cfe17a
+Content-Type: application/json
+x-api-key: 1837ffa7e5bc0c6aa5ccf91462729d7102bdcafd7864541bf04b997e7eba342b066dbfa0462c8e1a6ed9e8ec7b5b622f025f07f7b71d61d416fd9cfc34a4dc51
+
+### Get discount amount
+POST {{url_api_dev}}/discount/amount
+Content-Type: application/json
+x-api-key: 1837ffa7e5bc0c6aa5ccf91462729d7102bdcafd7864541bf04b997e7eba342b066dbfa0462c8e1a6ed9e8ec7b5b622f025f07f7b71d61d416fd9cfc34a4dc51
+
+{
+    "code": "SHOP-1234",
+    "userId": 2,
+    "shopId": "64ee1ecb8979971154cfe17a",
+    "products": [
+        {   
+            "productId": "64ee21b781ac1055c94ae724",
+            "quantity": 3,
+            "price": 200000
+        }
+    ]
+}
