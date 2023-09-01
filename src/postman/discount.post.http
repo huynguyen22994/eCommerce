@@ -3,17 +3,17 @@
 ### Create new discount from shop
 POST {{url_api_dev}}/discount
 Content-Type: application/json
-x-client-id: 64ee1ecb8979971154cfe17a
+x-client-id: 64f14935b41b4e8c9eeeb3b8
 x-api-key: 1837ffa7e5bc0c6aa5ccf91462729d7102bdcafd7864541bf04b997e7eba342b066dbfa0462c8e1a6ed9e8ec7b5b622f025f07f7b71d61d416fd9cfc34a4dc51
-authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGVlMWVjYjg5Nzk5NzExNTRjZmUxN2EiLCJlbWFpbCI6Imh1eS5uZ3V5ZW4yOTk0QGdtYWlsLmNvbSIsImlhdCI6MTY5MzMyNzA1MywiZXhwIjoxNjkzNDk5ODUzfQ.FYU23V9h0SixYH8ZucMZO396B7s9fJyq9ikLwQn6ZhHsxUOc-ptQoCd4F04vCvUzpVtRIiqPQ_gWN7wC7PHrW75m6UpkPnVgAGyO2eNbX8PMcVmr1XNMkO-UFnAsQN4DOPQr6p9U6gK4RxX6ZAqrvho8knESKdsBb-cNUgb9Nk52VC54GRcCo6Yto48iBr9VJ8xHwqkDf1B9m0c6n-tLZ8Uw8TnN2yHPCEwVsbOnOsaM3thLkpUX3DUjlw-P0ztvU2iEaozzfCqteVD7TOr3mK_GQmLhXDXXyq0Mk2a08MmvuRUL-REwXW4RzAWPVb8Q4sAtU-T8JJos87QlQH2c8KIK7p6EkUF2Jq4eqJ37kgE812yRoRVhqzMTJw6Lle1MP_odlkaXNPzhUMe2jYuntStCDp8cCvROtG6lJJ8A5ch30tzPpNq_n5eyTlZ0577gFCrGykbWDnQMcNOen5cPzNFmpRvMzAkH7QN3MwLttvQFBKXdUU11u7oV55EHAHj6wYkmW4PRQlfNDQu0pPmDu4uPj3TXwxmZ1Qtsb-WZ9Sv68N3ZLMVPoNqSO-RgerLsOkzZ_Kud6Stqw_txKDSAe3jQbux7E5_heJfY7vgecvh4nrUFv8rWu-IjsTydnh-qayVI2_dkicIFQ92PbGPwnwVhTbHxSbu_ciYmdBt3Fiw
+authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGYxNDkzNWI0MWI0ZThjOWVlZWIzYjgiLCJlbWFpbCI6Imh1eS5uZ3V5ZW4yOTk0NTVAZ21haWwuY29tIiwiaWF0IjoxNjkzNTM0NTE5LCJleHAiOjE2OTM3MDczMTl9.vDgdniYZcONxegR1kcg-zxk2IaVuoy9OPggZ05Q_2H_At8A916NIoIzlsd75FBgpFEItnMxn5K--UWq-ihQtx0KBk7dTZ5GoSe_f82bFnruNNU4O4T3sNRlxb9ruSsDBWELCelcBLs7Tuf1PpzfifEF5Ue9Arw4oNsNtOqm55mq1oYwsdHxrxeZavjfnR1lHCjwWDooViWrM31Y3EGp0gVAmmhNvEjiJeXpr_xecneJrvOuZJZCHWT5o8OaBE6KUgqnPJo7HM4OflgiNmM2A3WxKktNEJ-YaoDQnqqb9vmAGneX9dyTR24ARftVMYCybqnPQOnifqW0xgr5VxaGJs0GG6yHr-zDOVfyef3R_qPHEDeTU0b30KRNufrczKwcbv353Kmn81jNkQqgw78XqELUq80OMAna5m3q3bXAs6qgIOAbxf05hzOcXHNMJKqH4YG-RGMVSWEJizl3D97Qx548F15-mYofEWpeuYcuhqoVKy1bmlaCbYKa7Rd6zpaBJVmHNCH5kU6N8EFWCfYE_zHs5d89VctJiy32JiekhH29JjVMjtQvf24BYyxjjHXK5GfuWVqIzzrtYcGSQV2CH6WmsFqzFe3JPzmL36DR1RT_HyWpCsp49JxEO5sk0HRnOExX0QnL-cN-WOtiy_5ZjS4WgtO690lMSsoAG3MEJ2D0
 
 {
-    "name": "code fixed amount",
+    "name": "code percentage for product of shop 2",
     "description": "Use this code to get discount",
-    "type": "fixed_amount",
-    "value": 30000,
+    "type": "percentage",
+    "value": 10,
     "max_value": 30000,
-    "code": "SHOP-1234",
+    "code": "SHOP-percent-1234",
     "start_date": "2023-08-30 20:00:00",
     "end_date": "2023-09-30 20:00:00",
     "max_uses": 100,
@@ -23,7 +23,7 @@ authorization: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGVlMWVjYjg5
     "min_order_value": 200000,
     "is_active": true,
     "applies_to": "specific",
-    "product_ids": ["64ee21b781ac1055c94ae724"]
+    "product_ids": ["64f14998b41b4e8c9eeeb3bd"]
 }
 
 ### Get list discount of Shop
