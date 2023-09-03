@@ -4,6 +4,8 @@ const { findCartById } = require("../models/repositories/cart.repo")
 const { checkProductByServer } = require('../models/repositories/product.repo')
 const { BadRequestError, NotFoundError } = require('../core/error.response')
 const { applyDiscountCode } = require("../services/discount.service")
+const { acquireLock, releaseLock } = require('../services/redis.service')
+const { order } = require('../models/order.model')
 
 class CheckoutService {
 
@@ -106,6 +108,82 @@ class CheckoutService {
             checkout_order
         }
     }
+
+    static async orderByUser({
+        shop_order_ids,
+        cartId,
+        userId,
+        user_address = {},
+        user_payment = {}
+    }) {
+        const { shop_order_ids_new, checkout_order } = await CheckoutService.checkoutReview({ 
+            cartId,
+            userId,
+            shop_order_ids
+        })
+
+        // check lại một lần nữa xem có vượt tồn kho hay khong?
+        // get new Array products
+        const products = shop_order_ids_new.flatMap((order) => order.item_products)
+        console.log('[1] Products:::', products)
+        // acquireProduct dùng để lưu lại trạng thái xem có sản phẩm vào vượt mua, quá bán không
+        const acquireProduct = []
+        for(let i = 0; i < products.length; i++) {
+            const { price, quantity, productId } = products[i]
+            const keyLock = await acquireLock(productId, quantity, cartId) // keyLock return key hoặc null (nếu là key thì thóa điều kiện mua hàng)
+            acquireProduct.push(keyLock ? true : false) // dùng để check xem có product nào vượt mua quá bán không? nếu có thì chuyển user về trang giỏ hàng để xem lại sản phẩm thay đổi
+            if(keyLock) {
+                await releaseLock(keyLock) // giải phóng key lock
+            }
+        }
+        // Sau khi có acquireProduct, thì check lại nếu có một sản phẩm hết hàng trong kho thì
+        if(acquireProduct.includes(false)) throw new BadRequestError('Error: Have some product has updated, please come back you cart!!')
+
+        const newOrder = await order.create({ 
+            order_userId: userId,
+            order_checkout: checkout_order,
+            order_shipping: user_address, // order_shipping lưu thông tin giao hàng
+            order_payment: user_payment,
+            order_products: shop_order_ids_new
+        })
+
+        // Trường hợp, nếu insert thành công thì remove products trong cart của user
+        if(newOrder) {
+            // remove products in user cart
+            
+        }
+
+        return newOrder
+    }
+
+    /*
+    1. Query Order [User]
+    */
+   static async getOrderByUser() {
+
+   }
+
+    /*
+    1. Query Order Using ID [User]
+    */
+    static async getOneOrderByUser() {
+
+    }
+
+    /*
+    1. Cancel Order [User]
+    */
+    static async cancelOrderByUser() {
+
+    }
+
+    /*
+    1. Update Order Status [Shop | Admin]
+    */
+    static async updateOrderStatusByShop() {
+
+    }
+
 }
 
 module.exports = CheckoutService

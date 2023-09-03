@@ -1,6 +1,6 @@
 @url_api_dev = http://localhost:3000/v1/api
 
-### Create new cart from user
+### Checkout review cart of User
 POST {{url_api_dev}}/checkout/review
 Content-Type: application/json
 x-api-key: 1837ffa7e5bc0c6aa5ccf91462729d7102bdcafd7864541bf04b997e7eba342b066dbfa0462c8e1a6ed9e8ec7b5b622f025f07f7b71d61d416fd9cfc34a4dc51
