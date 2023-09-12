@@ -15,6 +15,14 @@ app.use(express.urlencoded({
     
 }))
 
+// Test pub and sub redis
+require('../src/tests/inventory.pubsub.test')
+const productTest = require('../src/tests/product.pubsub.test')
+setTimeout(() => {
+    productTest.purchaseproduct('product:001', 10)
+    productTest.purchaseproduct('product:002', 100)
+}, 1000)
+
 // init db
 require('../src/dbs/init.mongodb')
 // const { checkOverload, countConnect } = require('../src/helper/check.connect')
