@@ -10,5 +10,6 @@ router.use(authenticationV2)
 
 router.post('', asyncHandle(CommentController.createComment))
 router.get('', asyncHandle(CommentController.getCommentByParentId))
+router.delete('', asyncHandle(CommentController.deleteComment))
 
 module.exports = router
