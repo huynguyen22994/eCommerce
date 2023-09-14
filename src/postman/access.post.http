@@ -14,7 +14,7 @@ x-api-key: 1837ffa7e5bc0c6aa5ccf91462729d7102bdcafd7864541bf04b997e7eba342b066db
 ### LogIn
 POST {{url_api_dev}}/shop/login
 Content-Type: application/json
-x-api-key: efe748f90d00fe702310638b3abd149c26bb0d693549777f300e049cd9e09a0735fd3fde650ca7a3a67744b93f903fcf2f35a59438c8eec2a693760b7600186b
+x-api-key: 1837ffa7e5bc0c6aa5ccf91462729d7102bdcafd7864541bf04b997e7eba342b066dbfa0462c8e1a6ed9e8ec7b5b622f025f07f7b71d61d416fd9cfc34a4dc51
 
 {
     "email": "huy.nguyen2994@gmail.com",
