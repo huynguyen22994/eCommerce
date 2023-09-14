@@ -40,3 +40,7 @@ Nested Set Model thích hợp để sử dụng khi bạn cần lưu trữ và t
 ![](/images/nestedset.gif)
 ![](/images/nestedset2.gif)
 ![](/images/nestedset3.png)
+
+Sơ đồ để xóa một node trong Nested
+
+![](/images/delete-nestedsetmodel.png)
