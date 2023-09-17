@@ -95,6 +95,7 @@ class ProductController {
     }
 
     findAllProducts = async (req, res, next) => {
+        console.log('Into product')
         new SuccessResponse({
             message: 'Get list product OK',
             metadata: await ProductServiceV2.findAllProducts(req.query)
