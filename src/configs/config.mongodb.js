@@ -16,7 +16,7 @@
 // level 1
 const dev = {
     app: {
-        port: process.env.DEV_APP_PORT || 3000
+        port: process.env.DEV_APP_PORT || 8000
     },
     db: {
         host: process.env.DEV_DB_HOST || '127.0.0.1',
