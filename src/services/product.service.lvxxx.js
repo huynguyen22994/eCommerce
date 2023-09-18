@@ -7,6 +7,7 @@ const { findAllDraftForShop, findAllPublishForShop,  publishProductByShop,
         findProduct, updateProductById } = require('../models/repositories/product.repo')
 const { insertInventory } = require('../models/repositories/inventory.repo')        
 const { removeUndefinedObject, updateNestedObjectParser } = require('../utils')        
+const { pushNotiToSystem, NOTI_TYPES } = require('../services/notification.service')
 
 // defined Factory class to create Product
 class ProductFactory {
@@ -112,6 +113,23 @@ class Product {
                 productId: newProduct._id,
                 shopId: this.product_shop,
                 stock: this.product_quantity
+            })
+
+            // push notification to system collection
+            // LOGIC::: Vì push notification xử dụng cơ chế bất đồng bộ nên không cần thiết dùng asyn/await mà thay vào đó dùng then/catch
+            const SHOP_1_Index = 3
+            pushNotiToSystem({
+                type: NOTI_TYPES[SHOP_1_Index],
+                receivedId: 1,
+                senderId: this.product_shop,
+                options: {
+                    product_name: this.product_name,
+                    shop_name: this.product_shop
+                }
+            }).then((response) => {
+                console.log(response)
+            }).catch((err) => {
+                console.log(err)
             })
         }
 
