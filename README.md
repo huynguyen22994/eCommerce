@@ -44,3 +44,20 @@ Nested Set Model thích hợp để sử dụng khi bạn cần lưu trữ và t
 Sơ đồ để xóa một node trong Nested
 
 ![](/images/delete-nestedsetmodel.png)
+
+## Những kỹ thuật giúp cho Query dữ liệu một các nhanh chóng (Dùng với MongoDB)
+
+- 1. Đánh Index các trường thường xuyên query của collecttion
+- 2. Dùng pagination để giới hạn records cho mỗi làn truy vấn
+- 3. Dùng kỹ thuật Sharing trong database => kỹ thuật phân tán dữ liệu trên nhiều node
+- 4. Cache: lưu trữ dử liệu thông báo truy vấn thường xuyên để giảm truy vấn trên DB
+- 5. Xử lý bất đồng bộ hệ thống
+
+## Kiến trúc Push và Pull cho Hệ Thống Notification
+
+- Push là hệ thống sẽ triển khai CronJob để đều đặn một thời gian hệ thống sẽ thực hiện yêu cầu gửi thông bao đến những user có notice.
+- Pull là khi một user truy cập vào hệ thống thì sẽ gọi một request từ user đó đến hệ thống notification để yêu cầu thực hiện truy vấn những noti của user đó và trả lại notice cho user đó.
+
+=> 2 các đều có ưu và nhuộc điểm khác nhau. Nhưng một hệ thống tối ưu hiệu suất có thể kết hợp cả 2 cách. Nâng cao hơn dùng Message Queue cho hệ thống Notification
+
+![](/images/push-pull-notice.png)
