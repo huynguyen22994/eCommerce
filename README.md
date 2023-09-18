@@ -1,14 +1,19 @@
 # eCommerce
 
 ## Access Service
-- HMAC (Hash-based Message Authentication Code) là một thuật toán mã hóa được sử dụng để xác thực tính toàn vẹn và nguồn gốc của một thông điệp. Xử dụng thuật toán bất đối xứng để lấy primary key và public key dùng để sign và verify token
+- HMAC (Hash-based Message Authentication Code) là một thuật toán mã hóa được sử dụng để xác thực tính toàn vẹn và nguồn gốc của một thông điệp. Dùng để xác thực tính toàn vẹn dữ liệu được gửi từ Client đến Server
+- Xử dụng thuật toán bất đối xứng để lấy primary key và public key dùng để sign và verify acessToken và refreshToken
 - Sử dụng refreshToken để cấp lại accessToken cho shop.
-- Sử dụng refreshTokenUsed để lưu lại các refreshToken đã hết hạn đồng, track token nghi ngờ là hacker
+- Sử dụng refreshTokenUsed để lưu lại các refreshToken đã hết hạn đồng thời track token nghi ngờ là hacker
+
+![](/images/hmac-2.png)
 
 ## Cart Service
 - Kỹ thuật khi User checkout một giỏ hàng:
     1. Optimistic Locks (khóa lạc quan): apply Redis
-    2. Pesimistic Locks (khoá bi quan):
+    2. Pesimistic Locks (khoá bi quan): https://github.com/huynguyen22994/Tips/tree/main/OptimisticLocking-PessimisticLocking
+
+![](/images/pessimictic.png)    
 
 ## Transaction Redis
 Khái niệm Transaction:
