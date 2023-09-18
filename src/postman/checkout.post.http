@@ -1,4 +1,4 @@
-@url_api_dev = http://localhost:3000/v1/api
+@url_api_dev = http://localhost:8000/v1/api
 
 ### Checkout review cart of User
 POST {{url_api_dev}}/checkout/review
