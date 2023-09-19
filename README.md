@@ -97,3 +97,12 @@ Sử dụng cho môi trường development => nếu dùng cho production phải 
 > rabbitmqctl change_password guest 12345
 ```
 
+### Dead Letter Exchange - Vấn đề của MESSAGE QUEUE
+
+Flow để set cho hệ thống một DLX (Dead Letter Exchange)
+
+- 1. Trường hợp flow 1 là khi server nhận được message nhưng đến nghiệp vụ logic để send mail hoặc thông báo thì bị lỗi (từ nodemailer, mailchimp ...) thì hệ thống sẽ thực hiện flow này để xử lý DLX
+![](/images/DLX.png)
+
+- 2. Trường hợp flow 2 là trong thời gian nhận message của cusumer thì có message bị vượt quá Time Live => message này sẽ không truyền đến Server Notification dk thì lúc này thực hiện flow 2
+![](/images/DLX-TTL.png)
