@@ -74,3 +74,26 @@ Sử dụng cho môi trường development => nếu dùng cho production phải 
 ```
 > docker run -d --name kafkaMQ --network kafka-network -p 127.0.0.1:9092:9092 -e KAFKA_CFG_NODE_ID=0 -e KAFKA_CFG_PROCESS_ROLES=controller,broker -e KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093 -e KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP=CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT -e KAFKA_CFG_CONTROLLER_QUORUM_VOTERS=0@kafka:9093 -e KAFKA_CFG_CONTROLLER_LISTENER_NAMES=CONTROLLER bitnami/kafka:latest
 ```
+
+## RabbitMQ
+
+- Cài đặt
+
+```
+> docker pull rabbitmq:3-management
+
+> docker run -d --name rabbitMQ -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+> docker logs rabbitMQ
+====> http://localhost:15672/
+====> id: guest - pass: guest
+```
+
+- dùng flat 3-management là để hiển thị UI quản lý của RabbitMQ dựa trên web để dể theo dỏi và quản lý luồng thay vì xem log ở backend.
+
+Đổi password mặc định của RabbitMQ trong Docker
+```
+> docker exec -it rabbitMQ bash
+
+> rabbitmqctl change_password guest 12345
+```
+
