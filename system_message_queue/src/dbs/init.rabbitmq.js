@@ -16,6 +16,27 @@ const connectToRabbitMQ = async () => {
     }
 }
 
+const consumerQueue = async (channel, queueName) => {
+    try {
+        await channel.assertQueue(queueName, { durable: true })
+        console.log('Waiting for message from ... :', queueName)
+
+        channel.consume(queueName, msg => {
+            console.log(`Received message: ${ queueName } :::`, msg.content.toString())
+            /**
+             * Sau khi nhận được message
+             * 1. find user flowing that shop
+             * 2. Send message to user
+             * 3. Nếu send thành công, =>> success
+             * 4. Nếu gửi lỗi ==>> setup DLX ... (Dead letter exchange => hộp thư chết)
+             */
+        }, { noAck: true })
+    } catch(err) {
+        console.error('Error publish message to RabiitMQ::', err)
+        throw err
+    }
+}
+
 const connectToRabbitMQForTest = async () => {
     try {
         const { channel, connecttion } = await connectToRabbitMQ()
@@ -24,9 +45,9 @@ const connectToRabbitMQForTest = async () => {
         const message = 'Hello, this is first message'
         await channel.assertQueue(queue)
         await channel.sendToQueue(queue, Buffer.from(message))
-
+        
         // close the connection
-        await connecttion.close()
+        channel.close()
     } catch(error) {
         console.error('Error connect to RabbitMQ', error)
     }
@@ -34,5 +55,6 @@ const connectToRabbitMQForTest = async () => {
 
 module.exports = {
     connectToRabbitMQ,
-    connectToRabbitMQForTest
+    connectToRabbitMQForTest,
+    consumerQueue
 }
