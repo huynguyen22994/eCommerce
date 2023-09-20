@@ -4,6 +4,8 @@ const morgan = require('morgan')
 const helmet = require('helmet')
 const compression = require('compression')
 const cors = require('cors')
+const swaggerJsdoc = require('swagger-jsdoc')
+const swaggerUi = require('swagger-ui-express')
 const app = express()
 
 // init middwares
@@ -29,6 +31,10 @@ setTimeout(() => {
 require('../src/dbs/init.mongodb')
 // const { checkOverload, countConnect } = require('../src/helper/check.connect')
 // checkOverload()
+
+// init api docs
+const { apiDocsV1 } = require('./configs/config.swagger')
+app.use('/api-docs-v1', swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(apiDocsV1)));
 
 // init routes
 app.use('/', require('./routes'))
