@@ -4,6 +4,9 @@ const express = require('express')
 const { apiKey, permission } = require('../auth/checkAuth')
 const router = express.Router()
 
+// no check authen apikey
+router.use('/v1/api/developer', require('./developer'))
+
 // check apiKey middleware
 router.use(apiKey)
 // check permission
