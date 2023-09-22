@@ -38,6 +38,8 @@ const { apiDocsV1 } = require('./configs/config.swagger')
 const { devAuthen } = require('./auth/checkAuth.developer')
 app.use('/api-docs-v1', devAuthen, swaggerUi.serve, swaggerUi.setup(swaggerJsdoc(apiDocsV1)))
 app.get('/login-api.html', (req, res) => { res.sendFile(path.join(__dirname + '/public/login-api.html')) })
+// init graphql
+app.all('/graphql', require('./graphql'));
 
 // init routes
 app.use('/', require('./routes'))
