@@ -106,3 +106,20 @@ Flow để set cho hệ thống một DLX (Dead Letter Exchange)
 
 - 2. Trường hợp flow 2 là trong thời gian nhận message của cusumer thì có message bị vượt quá Time Live => message này sẽ không truyền đến Server Notification dk thì lúc này thực hiện flow 2
 ![](/images/DLX-TTL.png)
+
+### Orderd and Not Orderd trong Message Queue
+- Xử lý tuần tự và xử lý không tuần tự (Not ordered and Ordered)
+- Để xử lý việc bất tuần tự trong consumer của message Queue, chúng ta sử dụng `prefetch`
+```
+    // set prefetch để đảm bảo rằng những tác vụ này chỉ đảm bảo thực hiện cùng một lúc mà thôi
+    channel.prefetch(1)
+```
+
+## Khái niệm Mutex trong xử lý dữ liệu đồng thời cao
+Mutex (Mutual Exclusion) trong xử lý dữ liệu đồng thời cao của hệ thống web là một cơ chế đồng bộ hóa dữ liệu được sử dụng để đảm bảo rằng chỉ có một luồng hoặc tiến trình duy nhất có thể truy cập vào dữ liệu cùng một thời điểm. 
+
+Trong môi trường đa luồng hoặc đa tiến trình, khi nhiều luồng hoặc tiến trình cùng truy cập và thay đổi dữ liệu chung, có thể xảy ra các vấn đề như đọc/ghi không đồng nhất (inconsistent read/write) hoặc xung đột dữ liệu (data race). Mutex giúp ngăn chặn các vấn đề này bằng cách đảm bảo rằng chỉ có một luồng hoặc tiến trình có thể thực hiện các thao tác trên dữ liệu chung tại một thời điểm.
+
+Khi một luồng hoặc tiến trình muốn truy cập vào dữ liệu được bảo vệ bởi mutex, nó phải yêu cầu quyền truy cập bằng cách khóa mutex. Nếu mutex chưa được khóa bởi ai đó, luồng hoặc tiến trình yêu cầu sẽ khóa mutex và được phép truy cập vào dữ liệu. Trong khi đó, các luồng hoặc tiến trình khác phải chờ đến khi mutex được mở (unlocked) trước khi có thể yêu cầu quyền truy cập vào dữ liệu.
+
+Mutex là một cơ chế quan trọng để đảm bảo tính nhất quán và an toàn của dữ liệu trong môi trường đa luồng hoặc đa tiến trình. Tuy nhiên, khi sử dụng mutex, cần lưu ý về hiệu suất và khả năng xảy ra tình trạng khóa (deadlock) nếu không được sử dụng đúng cách.
